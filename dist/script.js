@@ -958,8 +958,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modals = function modals() {
+  var isAnyBtnPressed = false;
+
   function bindModal(triggerSelector, modalSelector, closeSelector) {
-    var closeOnOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+    var destroyTrigger = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSelector),
         close = modal.querySelector(closeSelector),
@@ -968,6 +970,12 @@ var modals = function modals() {
       el.addEventListener('click', function (e) {
         if (e.target) {
           e.preventDefault();
+        }
+
+        isAnyBtnPressed = true;
+
+        if (destroyTrigger) {
+          el.remove();
         }
 
         Object(_utils_closeModals__WEBPACK_IMPORTED_MODULE_2__["default"])(undefined, allModals);
@@ -1000,9 +1008,23 @@ var modals = function modals() {
     }, time);
   }
 
+  function showModalByScroll(triggerSelector) {
+    window.addEventListener('scroll', function () {
+      // document.documentElement.scrollHeight for "full standards mode"
+      // document.body.scrollHeight for "almost standards mode"
+      var scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+
+      if (!isAnyBtnPressed && window.pageYOffset + document.documentElement.clientHeight >= scrollHeight) {
+        document.querySelector(triggerSelector).click();
+      }
+    });
+  }
+
   bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
   bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+  bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
   showModalByTime('.popup-consultation', 60000);
+  showModalByScroll('.fixed-gift');
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
@@ -1083,6 +1105,7 @@ __webpack_require__.r(__webpack_exports__);
 var openModal = function openModal(modal) {
   var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'block';
   var bodyScrollWidth = Object(_calcScroll__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  modal.classList.add('animated', 'fadeIn');
   modal.style.display = display;
   document.body.style.overflow = 'hidden';
   document.body.style.marginRight = "".concat(bodyScrollWidth, "px");
