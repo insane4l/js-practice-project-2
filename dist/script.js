@@ -931,11 +931,14 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/sliders */ "./src/js/modules/sliders.js");
+
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_1__["default"])();
 });
 
 /***/ }),
@@ -986,7 +989,7 @@ var modals = function modals() {
       Object(_utils_closeModals__WEBPACK_IMPORTED_MODULE_2__["default"])(modal, allModals);
     });
     modal.addEventListener('click', function (e) {
-      if (e.target === modal && closeOnOverlay) {
+      if (e.target === modal) {
         Object(_utils_closeModals__WEBPACK_IMPORTED_MODULE_2__["default"])(modal, allModals);
       }
     });
@@ -1028,6 +1031,95 @@ var modals = function modals() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/sliders.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/sliders.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var sliders = function sliders() {
+  var bindSlider = function bindSlider(slides, direction, time, prevSelector, nextSelector) {
+    var items = document.querySelectorAll(slides);
+    var slideNum = 1;
+    var timerId;
+
+    function showSlide(num) {
+      items.forEach(function (item) {
+        item.style.display = 'none';
+        item.classList.add('animated');
+      });
+      items[num - 1].style.display = 'block';
+    }
+
+    function changeSlide(n) {
+      slideNum += n;
+
+      if (slideNum < 1) {
+        slideNum = items.length;
+      }
+
+      if (slideNum > items.length) {
+        slideNum = 1;
+      }
+
+      showSlide(slideNum);
+    }
+
+    function showPrevSlide() {
+      changeSlide(-1);
+      items[slideNum - 1].classList.remove('slideInRight');
+      items[slideNum - 1].classList.add('slideInLeft');
+    }
+
+    function showNextSlide() {
+      changeSlide(1);
+      items[slideNum - 1].classList.remove('slideInLeft');
+      items[slideNum - 1].classList.add('slideInRight');
+    }
+
+    try {
+      var prevBtn = document.querySelector(prevSelector),
+          nextBtn = document.querySelector(nextSelector);
+      prevBtn.addEventListener('click', showPrevSlide);
+      nextBtn.addEventListener('click', showNextSlide);
+    } catch (e) {}
+
+    function activateAnimation() {
+      if (direction === 'vertical') {
+        timerId = setInterval(function () {
+          changeSlide(1);
+          items[slideNum - 1].classList.add('slideInUp');
+        }, time);
+      } else {
+        timerId = setInterval(showNextSlide, time);
+      }
+    }
+
+    items[0].parentNode.addEventListener('mouseenter', function () {
+      clearInterval(timerId);
+    });
+    items[0].parentNode.addEventListener('mouseleave', function () {
+      activateAnimation();
+    });
+    activateAnimation();
+    showSlide(slideNum);
+  };
+
+  bindSlider('.main-slider-item', 'vertical', 3000);
+  bindSlider('.feedback-slider-item', 'horizontal', 5000, '.main-prev-btn', '.main-next-btn');
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (sliders);
 
 /***/ }),
 
