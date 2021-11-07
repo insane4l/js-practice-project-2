@@ -491,6 +491,9 @@ h4 {
 .card-block-text {
   margin-left: -6rem;
 }
+.status {
+	text-align: center;
+}
 .calc {
   padding: 8rem 0 4rem 0;
   /* Making it beautiful */
