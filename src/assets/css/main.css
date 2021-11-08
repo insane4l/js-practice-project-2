@@ -459,8 +459,8 @@ h4 {
   color: #c51abb;
 }
 .styles .button-transparent {
-  margin-top: 8rem;
-  margin-bottom: 6rem;
+  margin-top: 5rem;
+  margin-bottom: 11rem;
 }
 .styles .button-transparent:before {
   background: url("../img/reload.svg") no-repeat center;
@@ -469,6 +469,7 @@ h4 {
 }
 .styles .paints {
   position: absolute;
+  z-index: 11;
   bottom: -25rem;
   left: 0;
 }

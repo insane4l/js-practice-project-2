@@ -4279,8 +4279,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_phoneInputsMask__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/phoneInputsMask */ "./src/js/modules/phoneInputsMask.js");
-/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/sliders */ "./src/js/modules/sliders.js");
-/* harmony import */ var _modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/textFieldsValidation */ "./src/js/modules/textFieldsValidation.js");
+/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
+/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/sliders */ "./src/js/modules/sliders.js");
+/* harmony import */ var _modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/textFieldsValidation */ "./src/js/modules/textFieldsValidation.js");
+
 
 
 
@@ -4290,10 +4292,11 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_0__["default"])();
-  Object(_modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_phoneInputsMask__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_3__["default"])();
 });
 
 /***/ }),
@@ -4590,6 +4593,40 @@ var phoneMask = function phoneMask() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (phoneMask);
+
+/***/ }),
+
+/***/ "./src/js/modules/showMoreStyles.js":
+/*!******************************************!*\
+  !*** ./src/js/modules/showMoreStyles.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var showMoreStyles = function showMoreStyles() {
+  var cards = document.querySelectorAll('.styles-2'),
+      btn = document.querySelector('.button-styles');
+  cards.forEach(function (card) {
+    card.classList.add('animated', 'fadeInUp');
+  });
+  btn.addEventListener('click', function () {
+    cards.forEach(function (card) {
+      card.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
+      card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+    });
+    cards[0].parentNode.style.marginBottom = '8rem';
+    document.querySelector('.styles .paints').style.bottom = '-40rem';
+    btn.remove();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (showMoreStyles);
 
 /***/ }),
 
