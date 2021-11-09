@@ -4447,8 +4447,25 @@ var forms = function forms() {
       statusText.textContent = message.loading;
       statusBlock.appendChild(statusText);
       var formData = new FormData(form);
-      var api;
-      form.closest('.popup-design') || form.classList.contains('calc_form') ? api = path.designer : api = path.question;
+
+      if (form.classList.contains('calc_form')) {
+        function appendCalcData(key, selector) {
+          var field = document.querySelector(selector);
+          formData.append(key, "Option: ".concat(field.options[field.selectedIndex].text, " price: ").concat(field.value));
+        }
+
+        appendCalcData('size', '#size');
+        appendCalcData('material', '#material');
+        appendCalcData('options', '#options');
+        var totalPrice = document.querySelector('.calc-price');
+        totalPrice = totalPrice.textContent || totalPrice.innerText; // textContent for FireFox, innerText for another browsers
+
+        formData.append('totalPrice', totalPrice);
+      }
+
+      var api = path.question; // form.closest('.popup-design') || form.classList.contains('calc_form') ? 
+      //     api = path.designer : api = path.question;
+
       Object(_services_requests__WEBPACK_IMPORTED_MODULE_7__["postData"])(api, formData).then(function () {
         statusText.textContent = message.success;
         statusImg.setAttribute('src', message.ok);

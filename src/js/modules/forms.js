@@ -52,6 +52,22 @@ const forms = () => {
             statusBlock.appendChild(statusText);
 
             const formData = new FormData(form);
+            if ( form.classList.contains('calc_form') ) {
+
+                function appendCalcData(key, selector) {
+                    const field = document.querySelector(selector);
+                    formData.append(key, `Option: ${field.options[field.selectedIndex].text} price: ${field.value}`);
+                }
+
+                appendCalcData('size', '#size');
+                appendCalcData('material', '#material');
+                appendCalcData('options', '#options');
+
+                let totalPrice = document.querySelector('.calc-price');
+                totalPrice = totalPrice.textContent || totalPrice.innerText; // textContent for FireFox, innerText for another browsers
+                formData.append('totalPrice', totalPrice);
+            }
+
 
             let api;
             form.closest('.popup-design') || form.classList.contains('calc_form') ? 

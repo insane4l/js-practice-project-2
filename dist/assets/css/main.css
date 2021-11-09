@@ -523,7 +523,8 @@ h4 {
   font-size: 1.9rem;
   padding: 2rem 0;
 }
-.calc .promocode {
+.calc .promocode,
+.calc input {
   opacity: 0.6;
   font-family: 'Circe Extra Bold', sans-serif;
   margin-left: 4rem;
@@ -545,7 +546,7 @@ h4 {
   z-index: -1000;
 }
 .calc .button-order {
-  margin-top: 6rem;
+  margin-top: 2rem;
   padding-left: 8rem;
   padding-right: 8rem;
 }
