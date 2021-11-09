@@ -4347,9 +4347,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_phoneInputsMask__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/phoneInputsMask */ "./src/js/modules/phoneInputsMask.js");
-/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
-/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/sliders */ "./src/js/modules/sliders.js");
-/* harmony import */ var _modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/textFieldsValidation */ "./src/js/modules/textFieldsValidation.js");
+/* harmony import */ var _modules_priceCalc__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/priceCalc */ "./src/js/modules/priceCalc.js");
+/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
+/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/sliders */ "./src/js/modules/sliders.js");
+/* harmony import */ var _modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/textFieldsValidation */ "./src/js/modules/textFieldsValidation.js");
+
 
 
 
@@ -4360,11 +4362,12 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_0__["default"])();
-  Object(_modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_textFieldsValidation__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_phoneInputsMask__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_modules_priceCalc__WEBPACK_IMPORTED_MODULE_3__["default"])();
 });
 
 /***/ }),
@@ -4631,6 +4634,46 @@ var phoneMask = function phoneMask() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (phoneMask);
+
+/***/ }),
+
+/***/ "./src/js/modules/priceCalc.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/priceCalc.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var priceCalc = function priceCalc() {
+  var sizeField = document.querySelector('#size'),
+      materialField = document.querySelector('#material'),
+      optionsField = document.querySelector('#options'),
+      promocodeField = document.querySelector('.promocode'),
+      totalPriceField = document.querySelector('.calc-price');
+  var totalPrice = 0;
+
+  function setPrice() {
+    totalPrice = Math.round(+sizeField.value * +materialField.value + +optionsField.value);
+
+    if (sizeField.value === '' || materialField.value === '') {
+      totalPriceField.textContent = 'Пожалуйста укажите размер и материал картины';
+    } else if (promocodeField.value === 'IWANTPOPART') {
+      totalPriceField.textContent = Math.round(totalPrice * 0.7);
+    } else {
+      totalPriceField.textContent = totalPrice;
+    }
+  }
+
+  ;
+  sizeField.addEventListener('change', setPrice);
+  materialField.addEventListener('change', setPrice);
+  optionsField.addEventListener('change', setPrice);
+  promocodeField.addEventListener('input', setPrice);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (priceCalc);
 
 /***/ }),
 
