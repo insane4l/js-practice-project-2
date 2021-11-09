@@ -4463,9 +4463,8 @@ var forms = function forms() {
         formData.append('totalPrice', totalPrice);
       }
 
-      var api = path.question; // form.closest('.popup-design') || form.classList.contains('calc_form') ? 
-      //     api = path.designer : api = path.question;
-
+      var api;
+      form.closest('.popup-design') || form.classList.contains('calc_form') ? api = path.designer : api = path.question;
       Object(_services_requests__WEBPACK_IMPORTED_MODULE_7__["postData"])(api, formData).then(function () {
         statusText.textContent = message.success;
         statusImg.setAttribute('src', message.ok);
