@@ -1,3 +1,4 @@
+import filter from './modules/filter';
 import forms from './modules/forms';
 import modals from './modules/modals';
 import phoneMask from './modules/phoneInputsMask';
@@ -16,5 +17,6 @@ window.addEventListener('DOMContentLoaded', () => {
     textFieldsValidation();
     phoneMask();
     showMoreStyles();
-    priceCalc()
+    priceCalc();
+    filter();
 });
