@@ -1,20 +1,42 @@
+import { getData } from "../services/requests";
+
 const showMoreStyles = () => {
-    const cards = document.querySelectorAll('.styles-2'),
-          btn = document.querySelector('.button-styles');
-    
-    cards.forEach( card => {
-        card.classList.add('animated', 'fadeInUp');
+    const btn = document.querySelector('.button-styles'),
+          cardsWrapper = document.querySelector('.styles .row');
+
+    btn.addEventListener('click', function() {
+        getData('assets/db.json')
+            .then( res => {
+                document.querySelector('.styles .paints').style.bottom = '-40rem';
+                setTimeout(() => {
+                    createCards(res.styles);
+                }, 800)
+            })
+            .catch( error => console.log(error) );
+
+        this.remove();
     });
-    
-    btn.addEventListener('click', () => {
-        cards.forEach( card => {
-            card.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
-            card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+
+
+    const createCards = (items) => {
+        items.forEach( ({src, title, link}) => {
+            const div = document.createElement('div');
+
+            div.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1', 'animated', 'fadeInUp');
+            div.innerHTML = `
+                <div class=styles-block>
+                    <img src=${src} alt="style">
+                    <h4>${title}</h4>
+                    <a href=${link}>Подробнее</a>
+                </div>
+            `;
+            
+            cardsWrapper.appendChild(div);
+
+            cardsWrapper.style.marginBottom = '8rem';
         });
-        cards[0].parentNode.style.marginBottom = '8rem';
-        document.querySelector('.styles .paints').style.bottom = '-40rem';
-        btn.remove();
-    });
+    };
+    
 };
 
 export default showMoreStyles;

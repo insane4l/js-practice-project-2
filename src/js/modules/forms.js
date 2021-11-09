@@ -1,3 +1,5 @@
+import { postData } from "../services/requests";
+
 const forms = () => {
     const allForms = document.querySelectorAll('form'),
           uploads = document.querySelectorAll('[name="upload"]');
@@ -30,16 +32,6 @@ const forms = () => {
         })
     })
 
-    const postData = async (url, data) => {
-
-        const res = await fetch(url, {
-            method: 'POST',
-            body: data
-        });
-        
-        return await res.text();
-    };
-
     allForms.forEach( form => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -65,7 +57,7 @@ const forms = () => {
             form.closest('.popup-design') || form.classList.contains('calc_form') ? 
                 api = path.designer : api = path.question;
 
-            postData(api, form, formData)
+            postData(api, formData)
                 .then( () => {
                     statusText.textContent = message.success;
                     statusImg.setAttribute('src', message.ok); })
