@@ -8,6 +8,7 @@ import pictureSizes from './modules/pictureSizes';
 import priceCalc from './modules/priceCalc';
 import showMoreStyles from './modules/showMoreStyles';
 import sliders from './modules/sliders';
+import smoothScroll from './modules/smoothScroll';
 import textFieldsValidation from './modules/textFieldsValidation';
 
 
@@ -25,4 +26,5 @@ window.addEventListener('DOMContentLoaded', () => {
     pictureSizes();
     accordion();
     burger();
+    smoothScroll();
 });
