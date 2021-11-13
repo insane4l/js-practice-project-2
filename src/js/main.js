@@ -1,3 +1,4 @@
+import accordion from './modules/accordion';
 import filter from './modules/filter';
 import forms from './modules/forms';
 import modals from './modules/modals';
@@ -21,4 +22,5 @@ window.addEventListener('DOMContentLoaded', () => {
     priceCalc();
     filter();
     pictureSizes();
+    accordion();
 });
