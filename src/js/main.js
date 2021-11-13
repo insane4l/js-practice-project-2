@@ -1,4 +1,5 @@
 import accordion from './modules/accordion';
+import burger from './modules/burger';
 import filter from './modules/filter';
 import forms from './modules/forms';
 import modals from './modules/modals';
@@ -23,4 +24,5 @@ window.addEventListener('DOMContentLoaded', () => {
     filter();
     pictureSizes();
     accordion();
+    burger();
 });
