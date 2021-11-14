@@ -1,5 +1,6 @@
 import accordion from './modules/accordion';
 import burger from './modules/burger';
+import dropFiles from './modules/dropFiles';
 import filter from './modules/filter';
 import forms from './modules/forms';
 import modals from './modules/modals';
@@ -27,4 +28,5 @@ window.addEventListener('DOMContentLoaded', () => {
     accordion();
     burger();
     smoothScroll();
+    dropFiles();
 });
